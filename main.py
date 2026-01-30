@@ -17,11 +17,11 @@ def chat(user_input: str):
     Step-by-step conversational slot filling with validation
     """
 
-    # 1️⃣ Ask LLM what field is expected next
+    # Ask LLM what field is expected next
     agent_response = llama_prompt(user_input, conversation_state)
     field = agent_response["next_expected_field"]
 
-    # 2️⃣ Assign user input to the expected field
+    # Assign user input to the expected field
     if field:
         if field == "campaign_name":
             if len(user_input.strip()) < 3:
@@ -55,7 +55,7 @@ def chat(user_input: str):
                 )
             conversation_state["cta"] = user_input.strip()
 
-    # 3️⃣ Return structured response
+    # Return structured response
     return {
         "agent_message": agent_response["agent_message"],
         "reasoning": agent_response.get(
@@ -120,7 +120,7 @@ def submit():
     Validates conversation state and submits the ad payload.
     """
 
-    # 1️⃣ Check missing fields
+    # Check missing fields
     missing = missing_fields()
     if missing:
         raise HTTPException(
@@ -131,7 +131,7 @@ def submit():
             }
         )
 
-    # 2️⃣ Enforce music business rules before submission
+    # Enforce music business rules before submission
     ok, err = validate_music(
         conversation_state["objective"],
         conversation_state["music_choice"]
@@ -145,7 +145,7 @@ def submit():
             }
         )
 
-    # 3️⃣ Build validated payload
+    # Build validated payload
     payload = AdPayload(
         campaign_name=conversation_state["campaign_name"],
         objective=conversation_state["objective"],
@@ -156,10 +156,10 @@ def submit():
         }
     )
 
-    # 4️⃣ Submit to TikTok API (mocked)
+    # Submit to TikTok API (mocked)
     result = submit_ad(payload.dict(), ACCESS_TOKEN)
 
-    # 5️⃣ Interpret API failures
+    # Interpret API failures
     if "error" in result:
         raise HTTPException(
             status_code=400,
