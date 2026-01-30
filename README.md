@@ -4,8 +4,8 @@
 
 This project demonstrates how to build a reasoning-first AI agent that helps a user create a TikTok Ad configuration through conversation.
 
-flowchart TD
-    %% === User Interaction ===
+## flowchart TD
+    === User Interaction ===
     User[User Input / Commands] -->|POST /chat| Main[main.py<br/>FastAPI Orchestration]
 
     %% === main.py orchestrates everything ===
