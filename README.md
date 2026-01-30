@@ -8,7 +8,7 @@ This project demonstrates how to build a reasoning-first AI agent that helps a u
     === User Interaction ===
     User[User Input / Commands] -->|POST /chat| Main[main.py<br/>FastAPI Orchestration]
 
-    %% === main.py orchestrates everything ===
+    === main.py orchestrates everything ===
     Main --> Conversation[conversation.py<br/>Conversation State & Guards]
     Main --> LLM[llm.py<br/>Next Field Prompting]
     Main --> Rules[rules.py<br/>Business Rule Validation]
@@ -16,25 +16,25 @@ This project demonstrates how to build a reasoning-first AI agent that helps a u
     Main --> Schemas[schemas.py<br/>Payload Validation]
     Main --> OAuth[oauth.py<br/>OAuth Token Handling]
 
-    %% === Conversation logic ===
+    === Conversation logic ===
     Conversation -->|Store/Check fields| Main
     Conversation -->|Check completeness & missing fields| Rules
 
-    %% === LLM prompt logic ===
+    === LLM prompt logic ===
     LLM -->|Determine next_expected_field| Main
 
-    %% === Business rules ===
+    === Business rules ===
     Rules -->|Validate music, objective| Main
     Rules -->|Return error / suggestion| Main
 
-    %% === TikTok API interaction ===
+    === TikTok API interaction ===
     TikTok -->|submit_ad, validate_music_id, upload_music| Main
     OAuth -->|Validate token, handle errors| TikTok
 
-    %% === Payload validation ===
+    === Payload validation ===
     Schemas -->|Validate AdPayload structure| Main
 
-    %% === Final response to user ===
+    === Final response to user ===
     Main -->|Structured JSON Response| User
 
 
