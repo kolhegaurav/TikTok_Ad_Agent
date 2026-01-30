@@ -1,5 +1,4 @@
 # conversation.py
-# In-memory conversation store (single-session demo)
 
 conversation_state = {
     "conversation_id": "conv_001",
