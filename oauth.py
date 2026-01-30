@@ -84,7 +84,7 @@ def exchange_code_for_token(code: str):
     Simulates authorization code → access token exchange
     """
 
-    # ❌ Invalid client credentials
+    # Invalid client credentials
     if code == "bad_client":
         raise OAuthException(
             error="Invalid client credentials",
@@ -93,7 +93,7 @@ def exchange_code_for_token(code: str):
             retry=False
         )
 
-    # ❌ Missing permission scopes
+    # Missing permission scopes
     if code == "no_scope":
         raise OAuthException(
             error="Missing permission",
@@ -102,7 +102,7 @@ def exchange_code_for_token(code: str):
             retry=False
         )
 
-    # ❌ Expired authorization code
+    # Expired authorization code
     if code == "expired_code":
         raise OAuthException(
             error="Authorization code expired",
@@ -111,7 +111,7 @@ def exchange_code_for_token(code: str):
             retry=True
         )
 
-    # ✅ Successful token exchange
+    # Successful token exchange
     return {
         "access_token": "mock_access_token",
         "token_type": "Bearer",
